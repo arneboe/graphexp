@@ -205,7 +205,7 @@ var graphioGremlin = (function(){
 			else {
 				console.log('Bad communication protocol. Check configuration file. Accept "REST" or "websocket" .')
 			}
-				
+
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,7 +230,7 @@ var graphioGremlin = (function(){
 							//console.log("Results received")
 							if(callback){
 								callback(Data);
-							} else {				
+							} else {
 								handle_server_answer(Data,query_type,active_node,message);
 							}
 			},
@@ -287,7 +287,7 @@ var graphioGremlin = (function(){
 
 		var ws = new WebSocket(server_url);
 		ws.onopen = function (event){
-			ws.send(data,{ mask: true});	
+			ws.send(data,{ mask: true});
 		};
 		ws.onerror = function (err){
 			console.log('Connection error using websocket');
@@ -333,7 +333,7 @@ var graphioGremlin = (function(){
 			} else {
 				handle_server_answer(data,query_type,active_node,message);
 			}
-		};		
+		};
 	}
 
 	// Generate uuid for websocket requestId. Code found here:
@@ -386,7 +386,7 @@ var graphioGremlin = (function(){
 			//console.log(data);
 			var graph = arrange_data(data);
 			//console.log(graph)
-			if (query_type=='click') var center_f = 0; //center_f=0 mean no attraction to the center for the nodes 
+			if (query_type=='click') var center_f = 0; //center_f=0 mean no attraction to the center for the nodes
 			else if (query_type=='search') var center_f = 1;
 			else return;
 			graph_viz.refresh_data(graph,center_f,active_node);
@@ -424,7 +424,7 @@ var graphioGremlin = (function(){
 		if (list[i].id == elem) return i;
 	  }
 	  return null;
-	}  
+	}
 
 	/////////////////////////////////////////////////////////////
 	function arrange_datav2(data) {
@@ -485,7 +485,7 @@ var graphioGremlin = (function(){
 	var data_dic = {id:data.id, label:data.label, type:data.type, properties:{}}
 	var prop_dic = data.properties
 	//console.log(prop_dic)
-	for (var key in prop_dic) { 
+	for (var key in prop_dic) {
 		if (prop_dic.hasOwnProperty(key)) {
 			if (data.type == 'vertex'){// Extracting the Vertexproperties (properties of properties for vertices)
 				var property = prop_dic[key];

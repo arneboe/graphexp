@@ -39,44 +39,12 @@
 		<div class="pos-f-t">
 			<div class="collapse" id="navbarToggleExternalContent">
 				<nav class="navbar navbar-dark bg-dark" style="color:white;">
-					<div class="form-inline my-2 my-lg-0" style="color:white;">
-						<div class="nav input_unit_container form-group">
-							<label for="label_field">Node label :</label>
-							<input type="text" class="form-control"  name="label_field" id="label_field" placeholder="Node label" value="" />
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label for="search_field">Node property:</label>
-							<input name="search_field" class="form-control"  id="search_field" value="" />
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label class="nav input_label" for="search_value">Property value:</label>
-							<input name="search_value" class="form-control"  id="search_value" value="" />
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label for="search_type">Type of search:</label>
-							<select class="form-control form-control-lg" name="search_type" id="search_type">
-								<option value="eq">Equals</option>
-								<option value="contains">Contains</option>
-							</select>
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label for="limit_field">Results limit:</label>
-							<input name="limit_field" class="form-control"  id="limit_field" value="50" min="1" max="1000" type="number"/>
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label class="nav input_label" for="edge_filter">Traverse by edge:</label>
-							<input name="edge_filter" class="form-control"  id="edge_filter" value="" />
-						</div>
-						<div class="nav input_unit_container form-group">
-							<label class="nav input_label" for="nbLayers">Nb of layers</label>
-							<input type="number" class="form-control"  id="nbLayers" min="1" max="128" onclick="set_nb_layers()">
-						</div>
-					</div>
+						    <textarea class="form-control" name="query_field" id="query_field" rows="3">Query</textarea>
 				</nav>
 			</div>
 			<nav class="navbar navbar-dark bg-dark">
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span><span style="color: white;"> Form Queries</span>
+					<span class="navbar-toggler-icon"></span><span style="color: white;"> Query</span>
 				</button>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li style="margin-left: 10px;">
@@ -84,7 +52,7 @@
 					</li>
 					<li>
 						<div class="form-inline my-2 my-lg-0" id="editGraph" style="display:none; margin-left:10px;">
-							<div class="form-inline my-2 my-lg-0"> 
+							<div class="form-inline my-2 my-lg-0">
 								<button class="btn btn-default" onclick="addVertexForm()"> Add Vertex </button><br>
 								<button class="btn btn-default" onclick="editVertexForm()"> Edit Vertex </button><br>
 								<button class="btn btn-default" onclick="addEditEdgeForm()"> Add/Edit Edge </button><br>
@@ -93,7 +61,7 @@
 					</li>
 				</ul>
 				<div class="form-inline my-2 my-lg-0" style="color:white;">
-					<div class="form-inline my-2 my-lg-0"> 
+					<div class="form-inline my-2 my-lg-0">
 						<div class="form-check abc-checkbox" style="margin-right: 15px">
 							<input class="form-check-input" type="checkbox" name="Freeze" id="freeze-in" />
 							<label class="form-check-label" for="freeze-in">Freeze exploration</label>
@@ -128,7 +96,7 @@
 						<label for="vertexPropertyValue">Property Value:</label>
 						<input type="text" name="vertexPropertyValue" class="form-control" id="vertexPropertyValue"  placeholder="Enter Comma Seperated Property Value (e.g. Sandeep,27,male)">
 					</div>
-					<button class="btn btn-default btn-block" onclick="addVertex()"> Add Vertex </button>						 
+					<button class="btn btn-default btn-block" onclick="addVertex()"> Add Vertex </button>
 				</div><div class="nav input_unit_container", id="editVertexForm" style="display:none;">
 					<h2>Edit Vertex :</h2>
 					<div class="nav input_unit_container form-group">
@@ -183,7 +151,7 @@
 							</label>
 						</div>
 					</div>
-					<div  id="graphInfo" style="pointer-events:none;">	
+					<div  id="graphInfo" style="pointer-events:none;">
 					</div>
 				</div>
 
@@ -192,7 +160,7 @@
 				</div>
 				<div class="aside right_bar" id="details" style="pointer-events:auto;">
 					<div id="nodeInfo" style="pointer-events:none;">
-					</div>				
+					</div>
 				</div>
 
 			</div>
@@ -235,7 +203,7 @@
 									</form>
 
 								</div>
-							</div>      
+							</div>
 						</div>
 						<div class="modal-footer">
 							<a style="display: block;position: absolute;left: 30px;" href="http://www.github.com/bricaud/graphexp">Graph Explorer V 0.8.0</a>
@@ -253,7 +221,7 @@
 			// Create the graph canvas in the chosen div element
 			graph_viz.init("#main");
 			// Add the zoom layer to the graph
-			//var svg_graph = 
+			//var svg_graph =
 			graph_viz.addzoom();
 			//graph_viz.layers.set_nb_layers(4);
 
@@ -276,7 +244,7 @@
 		//nav_choices.append("li").append("button").attr("onclick",search_query).text("Search")
 		var select = d3.select('#prop_choice')
 		.append('select').attr('class','select').attr('id','search_field')
-		
+
 		var select_node = select.append('optgroup').attr('label','Nodes')
 			//.on('change',onchange)
 
@@ -306,7 +274,7 @@
 		.data(prop_list).enter().append("li");
 			//.append('label');
 
-			
+
 			property_label.append('input').attr('type','checkbox').attr('id',function (d) { return item+"_"+d; })
 			.attr('id_nb',function (d) { return prop_list.indexOf(d); })
 			//.attr('onchange',function(d){display_prop(d);});
@@ -345,7 +313,7 @@
 			var text_offset = 10;
 			var prop_name = prop_id.slice(prop_id.indexOf("_")+1);
 			var item = prop_id.slice(0,prop_id.indexOf("_"));
-			console.log(prop_id,item)		
+			console.log(prop_id,item)
 			if(d3.select("#"+prop_id).property("checked")){
 				if (item=='nodes'){
 					var elements_text = d3.selectAll('.node');
@@ -383,7 +351,7 @@
 			//.text(function (d) {return d.label});
 			prop_id_nb = prop_id_nb + 1;
 		}
-		else { 
+		else {
 			console.log('Bad item name.'); return 1;
 		}
 		elements_text.classed("prop_details",true).classed(prop_id,true)
