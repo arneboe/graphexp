@@ -217,7 +217,7 @@
 				if(host){
 					$('#server_address').val(host);
 				}
-				init_property_bar();
+
 			// Create the graph canvas in the chosen div element
 			graph_viz.init("#main");
 			// Add the zoom layer to the graph
@@ -232,9 +232,6 @@
 			//graph_viz.graph_events.test();
 
 
-			function init_property_bar(){
-				document.getElementById('nbLayers').value = default_nb_of_layers;
-			}
 
 			function change_nav_bar(node_data,edge_data){
 				var nav_bar = d3.select("#prop_choice");
