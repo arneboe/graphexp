@@ -16,10 +16,6 @@ limitations under the License.
 
 // Interface between the visualization and the Gremlin server.
 
-var traversal_source = getUrlParameter('ts');
-if (traversal_source == null) {
-    traversal_source = "g"
-}
 
 var graphioGremlin = (function(){
 	"use strict";
@@ -53,6 +49,11 @@ var graphioGremlin = (function(){
 		}
 
 	function get_graph_info(){
+    var traversal_source = $('#traversal_source_field').val();
+    if (!traversal_source){
+      $('#outputArea').html("<br><p>Missing traversal source<br><br>");
+      return;
+    }
 		var gremlin_query_nodes = "nodes = " + traversal_source + ".V().groupCount().by(label);"
 		var gremlin_query_edges = "edges = " + traversal_source + ".E().groupCount().by(label);"
 		var gremlin_query_nodes_prop = "nodesprop = " + traversal_source + ".V().valueMap().select(keys).groupCount();"
@@ -91,6 +92,7 @@ var graphioGremlin = (function(){
     //example query
     //nodes = graph_3_traversal.V().limit(50).toList();edges = graph_3_traversal.V(nodes).aggregate('node').outE().as('edge').inV().where(within('node')).select('edge').toList();[nodes,edges]
 
+
 		// Preprocess query
 		let input_string = $('#query_field').val();
     var message = ""
@@ -111,6 +113,7 @@ var graphioGremlin = (function(){
 		if(isNaN(id)){ // Add quotes if id is a string (not a number).
 			id = '"'+id+'"';
 		}
+    var traversal_source = $('#traversal_source_field').val();
 		var gremlin_query_nodes = 'nodes = ' + traversal_source + '.V('+id+').as("node").both('+(edge_filter?'"'+edge_filter+'"':'')+').as("node").select(all,"node").inject(' + traversal_source + '.V('+id+')).unfold()'
 		var gremlin_query_edges = "edges = " + traversal_source + ".V("+id+").bothE("+(edge_filter?"'"+edge_filter+"'":"")+")";
 		var gremlin_query = gremlin_query_nodes+'\n'+gremlin_query_edges+'\n'+'[nodes.toList(),edges.toList()]'
